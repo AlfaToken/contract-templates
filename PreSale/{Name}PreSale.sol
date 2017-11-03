@@ -28,7 +28,7 @@ contract {Name}PreSale {
 
     function () payable {
         uint amount = msg.value;
-        uint tokenAmount = amount / price;
+        uint tokenAmount = amount * price;
         if (tokenAmount < minSaleAmount) throw;
         amountRaised += amount;
         token.transfer(msg.sender, tokenAmount * (100 + bonus) / 100);
