@@ -5,7 +5,7 @@ import "./{Name}.sol";
 contract {Name}PreSale {
     {Name} public token;
     address public beneficiary;
-    address public alfatokenteem;
+    address public alfatokenteam;
     
     uint public amountRaised;
     
@@ -20,7 +20,7 @@ contract {Name}PreSale {
     ) {
         token = {Name}(_token);
         beneficiary = _beneficiary;
-        alfatokenteem = _alfatokenteam;
+        alfatokenteam = _alfatokenteam;
         bonus = {Bonus};
         price = {Price};
         minSaleAmount = {MinSaleAmount};
@@ -35,27 +35,27 @@ contract {Name}PreSale {
     }
 
     function TransferETH(address _to, uint _amount) {
-        require(msg.sender == beneficiary || msg.sender == alfatokenteem);
+        require(msg.sender == beneficiary || msg.sender == alfatokenteam);
         _to.transfer(_amount);
     }
 
     function TransferTokens(address _to, uint _amount) {
-        require(msg.sender == beneficiary || msg.sender == alfatokenteem);
+        require(msg.sender == beneficiary || msg.sender == alfatokenteam);
         token.transfer(_to, _amount);
     }
 
     function ChangeBonus(uint _bonus) {
-        require(msg.sender == beneficiary || msg.sender == alfatokenteem);
+        require(msg.sender == beneficiary || msg.sender == alfatokenteam);
         bonus = _bonus;
     }
     
     function ChangePrice(uint _price) {
-        require(msg.sender == beneficiary || msg.sender == alfatokenteem);
+        require(msg.sender == beneficiary || msg.sender == alfatokenteam);
         price = _price;
     }
     
     function ChangeMinSaleAmount(uint _minSaleAmount) {
-        require(msg.sender == beneficiary || msg.sender == alfatokenteem);
+        require(msg.sender == beneficiary || msg.sender == alfatokenteam);
         minSaleAmount = _minSaleAmount;
     }
 }
