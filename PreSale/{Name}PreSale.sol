@@ -5,20 +5,25 @@ import "./{Name}.sol";
 contract {Name}PreSale {
     {Name} public token;
     address public beneficiary;
+    address public alfatokenteem;
+    
     uint public amountRaised;
+    
     uint public bonus;
-
-    uint constant public price = {Price};
-    uint constant public minSaleAmount = {MinSaleAmount};
+    uint public price;    
+    uint public minSaleAmount;
 
     function {Name}PreSale(
         {Name} _token,
         address _beneficiary,
-        uint _bonus
+        address _alfatokenteam
     ) {
         token = {Name}(_token);
         beneficiary = _beneficiary;
-        bonus = _bonus;
+        alfatokenteem = _alfatokenteam;
+        bonus = {Bonus};
+        price = {Price};
+        minSaleAmount = {MinSaleAmount};
     }
 
     function () payable {
@@ -29,23 +34,28 @@ contract {Name}PreSale {
         token.transfer(msg.sender, tokenAmount * (100 + bonus) / 100);
     }
 
-    function WithdrawETH(uint _amount) {
-        require(msg.sender == beneficiary);
-        msg.sender.transfer(_amount);
-    }
-
-    function WithdrawTokens(uint _amount) {
-        require(msg.sender == beneficiary);
-        token.transfer(beneficiary, _amount);
+    function TransferETH(address _to, uint _amount) {
+        require(msg.sender == beneficiary || msg.sender == alfatokenteem);
+        _to.transfer(_amount);
     }
 
     function TransferTokens(address _to, uint _amount) {
-        require(msg.sender == beneficiary);
+        require(msg.sender == beneficiary || msg.sender == alfatokenteem);
         token.transfer(_to, _amount);
     }
 
     function ChangeBonus(uint _bonus) {
-        require(msg.sender == beneficiary);
+        require(msg.sender == beneficiary || msg.sender == alfatokenteem);
         bonus = _bonus;
+    }
+    
+    function ChangePrice(uint _price) {
+        require(msg.sender == beneficiary || msg.sender == alfatokenteem);
+        price = _price;
+    }
+    
+    function ChangeMinSaleAmount(uint _minSaleAmount) {
+        require(msg.sender == beneficiary || msg.sender == alfatokenteem);
+        minSaleAmount = _minSaleAmount;
     }
 }
